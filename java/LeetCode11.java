@@ -16,8 +16,16 @@ public class LeetCode11 {
     public int maxArea(int[] height) {
         int max = 0;
 
-        for (int i = 1; i < height.length; i++) {
-            max = Math.max(max, max(i, height));
+        int i = 0, j = height.length - 1;
+
+        while (i != j) {
+            int min = Integer.min(height[i], height[j]);
+            max = Integer.max(max, min * (j - i));
+            if (height[i] >= height[j]) {
+                j--;
+            } else {
+                i++;
+            }
         }
 
         return max;
