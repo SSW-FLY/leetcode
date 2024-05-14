@@ -1,4 +1,6 @@
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LeetCode128 {
 
@@ -18,8 +20,24 @@ public class LeetCode128 {
 
     public int longestConsecutive(int[] nums) {
 
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        int longestStreak = 0;
 
-        return 1;
+        for (Integer s : set) {
+            if (!set.contains(s - 1)) {
+                int current = s;
+                int currentStreak = 1;
+                while (set.contains(current + 1)) {
+                    current++;
+                    currentStreak++;
+                }
+                longestStreak = Math.max(longestStreak, currentStreak);
+            }
+        }
+        return longestStreak;
     }
 
 
